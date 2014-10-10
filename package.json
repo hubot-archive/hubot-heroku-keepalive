@@ -1,7 +1,7 @@
 {
   "name": "hubot-heroku-keepalive",
   "description": "A hubot script that keeps the hubot Heroko web dyno alive",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Josh Nichols <technicalpickles@github.com>",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts, heroku",
