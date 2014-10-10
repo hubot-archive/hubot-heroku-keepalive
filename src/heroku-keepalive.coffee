@@ -18,7 +18,8 @@
 
 module.exports = (robot) ->
   keepaliveUrl = process.env.HUBOT_HEROKU_KEEPALIVE_URL or process.env.HEROKU_URL
-  keepaliveUrl = "#{keepaliveUrl}/" unless keepaliveUrl?.match(/\/$/)
+  if keepaliveUrl and keepaliveUrl.match(/\/$/)
+    keepaliveUrl = "#{keepaliveUrl}/"
 
   # interval, in minutes
   keepaliveInterval = if process.env.HUBOT_HEROKU_KEEPALIVE_INTERVAL?
