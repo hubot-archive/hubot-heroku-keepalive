@@ -17,33 +17,34 @@
 
 module.exports = (robot) ->
   keepaliveUrl = process.env.HUBOT_HEROKU_KEEPALIVE_URL or process.env.HEROKU_URL
-  keepaliveUrl = "#{keepaliveUrl}/" unless keepaliveUrl.endsWith("")
+  keepaliveUrl = "#{keepaliveUrl}/" unless keepaliveUrl?.match(/\/$/)
 
   # interval, in minutes
   keepaliveInterval = if process.env.HUBOT_HEROKU_KEEPALIVE_INTERVAL?
-                        parseFloat process.env.HUBOT_HEROKU_KEEPALIVE_URL
+                        parseFloat process.env.HUBOT_HEROKU_KEEPALIVE_INTERVAL
                       else
                         5
 
-  if keepaliveUrl?
-    robot.logger.warn "hubot-heroku-alive included, but missing HUBOT_HEROKU_KEEPALIVE_URL. `heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_url | cut -d= -f2)`"
+  unless keepaliveUrl?
+    robot.logger.error "hubot-heroku-alive included, but missing HUBOT_HEROKU_KEEPALIVE_URL. `heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_url | cut -d= -f2)`"
     return
 
   # check for legacy heroku keepalive from robot.coffee, and remove it
   if robot.pingIntervalId
     clearInterval(robot.pingIntervalId)
 
-  if keepaliveInterval > 0
+  if keepaliveInterval > 0.0
     robot.herokuKeepaliveIntervalId = setInterval =>
-      HttpClient.create("#{keepaliveUrl}heroku/keepalive").post() (err, res, body) =>
-        robot.logger.info 'keep alive ping!'
+      robot.logger.info 'keepalive ping'
+      robot.http("#{keepaliveUrl}heroku/keepalive").post() (err, res, body) =>
+        robot.logger.info "keepalive pong: #{res.statusCode} #{body}"
     , keepaliveInterval * 60 * 1000
   else
-    robot.logger.info "hubot-heroku-keepalive is 0, so not keeping alive"
+    robot.logger.info "hubot-heroku-keepalive is #{keepaliveInterval}, so not keeping alive"
 
   keepaliveCallback = (req, res) ->
     res.set 'Content-Type', 'text/plain'
-    res.send "I'm totally alive, how are you?"
+    res.send 'OK'
 
   # keep this different from the legacy URL in httpd.coffee
   robot.router.post "/heroku/keepalive", keepaliveCallback
