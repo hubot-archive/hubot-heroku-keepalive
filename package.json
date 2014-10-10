@@ -1,0 +1,43 @@
+{
+  "name": "hubot-heroku-keepalive",
+  "description": "A hubot script that keeps its Heroko web dynos alive",
+  "version": "0.0.0",
+  "author": "Josh Nichols <technicalpickles@github.com>",
+  "license": "MIT",
+
+  "keywords": "hubot, hubot-scripts, heroku",
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hubot-scripts/hubot-heroku-keepalive.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/hubot-scripts/hubot-heroku-keepalive/issues"
+  },
+
+  "dependencies": {
+  },
+
+  "peerDependencies": {
+    "hubot": "2.x"
+  },
+
+  "devDependencies": {
+    "hubot": "2.x",
+    "mocha": "*",
+    "chai": "*",
+    "sinon-chai": "*",
+    "sinon": "*",
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-release": "~0.6.0",
+    "matchdep": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+
+  "main": "index.coffee",
+
+  "scripts": {
+    "test": "grunt test"
+  }
+}
