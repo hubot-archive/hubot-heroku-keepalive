@@ -52,3 +52,14 @@ The legacy support uses the `HEROKU_URL` environment variable instead of
 `HUBOT_HEROKU_KEEPALIVE_URL`, so for forward compatability,
 hubot-heroku-keepalive will also use HEROKU_URL if it's present, and will
 also disable the legacy keepalive behavior if it's present.
+
+## Development
+
+The best way is to use `npm link` and make sure to point HUBOT_HEROKU_KEEPALIVE_URL at the right place:
+
+```
+hubot-heroku-keepalive$ npm link
+hubot-heroku-keepalive$ cd /path/to/your/hubot
+hubot$ npm link hubot-heroku-keepalive
+hubot$ export HUBOT_HEROKU_KEEPALIVE_URL=http://localhost:8080/
+hubot$ bin/hubot
