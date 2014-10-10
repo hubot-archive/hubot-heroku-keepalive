@@ -38,7 +38,11 @@ module.exports = (robot) ->
     robot.herokuKeepaliveIntervalId = setInterval =>
       robot.logger.info 'keepalive ping'
       robot.http("#{keepaliveUrl}heroku/keepalive").post() (err, res, body) =>
-        robot.logger.info "keepalive pong: #{res.statusCode} #{body}"
+        if err?
+          robot.logger.info "keepalie pong: #{err}"
+          robot.emit 'error', err
+        else
+          robot.logger.info "keepalive pong: #{res.statusCode} #{body}"
     , keepaliveInterval * 60 * 1000
   else
     robot.logger.info "hubot-heroku-keepalive is #{keepaliveInterval}, so not keeping alive"
