@@ -1,16 +1,17 @@
 # Description
-#   A hubot script that keeps its Heroko web dynos alive
+#   A hubot script that keeps its Heroko web dynos alive.
+#
+# Notes:
+#   This replaces hubot's builtin Heroku keepalive behavior. It uses the same
+#   environment variable (HEROKU_URL), but removes the period ping.
 #
 # Configuration:
 #   HUBOT_HEROKU_KEEPALIVE_URL or HEROKU_URL: required
 #   HUBOT_HEROKU_KEEPALIVE_INTERVAL: optional, defaults to 5 minutes
 #
-# Commands:
-#   hubot hello - <what the respond trigger does>
-#   orly - <what the hear trigger does>
-#
-# Notes:
-#   <optional notes required for the script>
+# URLs:
+#   GET /heroku/keepalive
+#   GET /heroku/keepalive
 #
 # Author:
 #   Josh Nichols <technicalpickles@github.com>
