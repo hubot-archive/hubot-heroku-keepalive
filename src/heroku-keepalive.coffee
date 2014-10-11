@@ -40,7 +40,7 @@ module.exports = (robot) ->
       robot.logger.info 'keepalive ping'
       robot.http("#{keepaliveUrl}heroku/keepalive").post() (err, res, body) =>
         if err?
-          robot.logger.info "keepalie pong: #{err}"
+          robot.logger.info "keepalive pong: #{err}"
           robot.emit 'error', err
         else
           robot.logger.info "keepalive pong: #{res.statusCode} #{body}"
