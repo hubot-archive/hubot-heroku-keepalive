@@ -17,6 +17,8 @@
 #   Josh Nichols <technicalpickles@github.com>
 
 module.exports = (robot) ->
+  return if process.env.NODE_ENV is 'development'
+
   keepaliveUrl = process.env.HUBOT_HEROKU_KEEPALIVE_URL or process.env.HEROKU_URL
   if keepaliveUrl and not keepaliveUrl.match(/\/$/)
     keepaliveUrl = "#{keepaliveUrl}/"
