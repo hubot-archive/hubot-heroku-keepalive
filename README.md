@@ -30,10 +30,14 @@ doing away with a 24/7 free dyno. `HUBOT_HEROKU_WAKEUP_TIME` and
 `HUBOT_HEROKU_SLEEP_TIME` define the waking hours - between these times the keepalive
 will ping your Heroku app.  Outside of those times, the ping will be surpressed
 allowing the dyno to shut down.  Accessing your Hubot during a sleep period will
-wake it, but it will return to sleep after 30 minutes.  `HUBOT_HEROKU_WAKEUP_TIME`
+wake it, but it will return to sleep after 30 minutes.  
+
+`HUBOT_HEROKU_WAKEUP_TIME`
 and `HUBOT_HEROKU_SLEEP_TIME` are times based on the timezone of your Heroku
 application which defaults to UTC.  You can change this with
-`heroku config:add TZ="America/New_York"`
+`heroku config:add TZ="America/New_York"`.
+
+You must still implement a process to wake the heroku app up in the morning, such as a cron job or a custom command that posts to your heroku instance from your chat.
 
 
 For hubot-heroku-keepalive to be useful, you *must* at least set
