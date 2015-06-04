@@ -10,7 +10,7 @@
 #   HUBOT_HEROKU_KEEPALIVE_INTERVAL: optional, defaults to 5 minutes
 #
 # URLs:
-#   GET /heroku/keepalive
+#   POST /heroku/keepalive
 #   GET /heroku/keepalive
 #
 # Author:
