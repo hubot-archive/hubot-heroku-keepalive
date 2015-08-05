@@ -1,6 +1,6 @@
 # hubot-heroku-keepalive
 
-A hubot script that keeps the hubot Heroko web dyno alive.
+A hubot script that keeps the hubot Heroku web dyno alive.
 
 ## Installation
 
