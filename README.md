@@ -18,10 +18,30 @@ Then add **hubot-heroku-keepalive** to your `external-scripts.json`:
 
 ## Configuring
 
-hubot-heroku-keepalive is configured by two environment variables:
+hubot-heroku-keepalive is configured by four environment variables:
 
 * HUBOT_HEROKU_KEEPALIVE_URL - the URL to keepalive
 * HUBOT_HEROKU_KEEPALIVE_INTERVAL - the interval in which to keepalive, in minutes
+* HUBOT_HEROKU_WAKEUP_TIME - optional,  the time of day (HH:MM) when hubot should wake up.
+* HUBOT_HEROKU_SLEEP_TIME - optional, the time of day (HH:MM) when hubot should go to sleep.
+
+In May, 2015, Heroku introduced a [new pricing tier](https://blog.heroku.com/archives/2015/5/7/new-dyno-types-public-beta)
+doing away with a 24/7 free dyno. `HUBOT_HEROKU_WAKEUP_TIME` and
+`HUBOT_HEROKU_SLEEP_TIME` define the waking hours - between these times the keepalive
+will ping your Heroku app.  Outside of those times, the ping will be surpressed
+allowing the dyno to shut down.  Accessing your Hubot during a sleep period will
+wake it, but it will return to sleep after 30 minutes.  
+
+`HUBOT_HEROKU_WAKEUP_TIME`
+and `HUBOT_HEROKU_SLEEP_TIME` are times based on the timezone of your Heroku
+application which defaults to UTC.  You can change this with
+`heroku config:add TZ="America/New_York"`.
+
+You must still implement a process to wake the heroku app up in the morning, such as a cron job or a custom command that posts to your heroku instance from your chat.
+
+If `HUBOT_HEROKU_WAKEUP_TIME` and `HUBOT_HEROKU_SLEEP_TIME` are not defined, then Hubot will be kept alive constantly. If your Hubot is running on a paid plan on Heroku,
+then you do not need to have your dyno rest and do not need to set these variables.
+
 
 For hubot-heroku-keepalive to be useful, you *must* at least set
 HUBOT_HEROKU_KEEPALIVE_URL. You can find out the value for this by using the
