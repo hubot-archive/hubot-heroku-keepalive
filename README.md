@@ -22,8 +22,8 @@ hubot-heroku-keepalive is configured by four environment variables:
 
 * HUBOT_HEROKU_KEEPALIVE_URL - the URL to keepalive
 * HUBOT_HEROKU_KEEPALIVE_INTERVAL - the interval in which to keepalive, in minutes
-* HUBOT_HEROKU_WAKEUP_TIME - optional,  the time of day (HH:MM) when hubot should wake up.  Default 6:00 (6 am)
-* HUBOT_HEROKU_SLEEP_TIME - optional, the time of day (HH:MM) when hubot should go to sleep. Default 22:00 (10 pm)
+* HUBOT_HEROKU_WAKEUP_TIME - optional,  the time of day (HH:MM) when hubot should wake up.
+* HUBOT_HEROKU_SLEEP_TIME - optional, the time of day (HH:MM) when hubot should go to sleep.
 
 In May, 2015, Heroku introduced a [new pricing tier](https://blog.heroku.com/archives/2015/5/7/new-dyno-types-public-beta)
 doing away with a 24/7 free dyno. `HUBOT_HEROKU_WAKEUP_TIME` and
@@ -38,6 +38,9 @@ application which defaults to UTC.  You can change this with
 `heroku config:add TZ="America/New_York"`.
 
 You must still implement a process to wake the heroku app up in the morning, such as a cron job or a custom command that posts to your heroku instance from your chat.
+
+If `HUBOT_HEROKU_WAKEUP_TIME` and `HUBOT_HEROKU_SLEEP_TIME` are not defined, then Hubot will be kept alive constantly. If your Hubot is running on a paid plan on Heroku,
+then you do not need to have your dyno rest and do not need to set these variables.
 
 
 For hubot-heroku-keepalive to be useful, you *must* at least set
