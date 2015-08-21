@@ -45,6 +45,18 @@ heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_u
 heroku config:add TZ="America/New_York"
 ```
 
+## Waking Hubot Up
+
+This script will the dyno alive once it is awake, but something needs to wake it up. You can use the [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) to wake the dyno up. Add the scheduler addon by running:
+
+```
+heroku addons:create scheduler:standard
+```
+
+The scheduler must be manually configured from the web interface, so run `heroku addons:open scheduler` and configure it to run `curl ${HUBOT_HEROKU_KEEPALIVE_URL}heroku/keepalive` at the time configured for `HUBOT_HEROKU_WAKEUP_TIME`.
+
+![Heroku Scheduler Screenshot](https://cloud.githubusercontent.com/assets/173/9414275/2e4b67ea-4805-11e5-80d0-d6b26ead50ef.png)
+
 ## Legacy Support
 
 Hubot has for a long time had it's own builtin way to keep its web dyno alive,
