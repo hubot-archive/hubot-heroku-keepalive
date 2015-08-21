@@ -47,7 +47,7 @@ heroku config:add TZ="America/New_York"
 
 ## Waking Hubot Up
 
-This script will the dyno alive once it is awake, but something needs to wake it up. You can use the [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) to wake the dyno up. Add the scheduler addon by running:
+This script will keep the dyno alive once it is awake, but something needs to wake it up. You can use the [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) to wake the dyno up. Add the scheduler addon by running:
 
 ```
 heroku addons:create scheduler:standard
