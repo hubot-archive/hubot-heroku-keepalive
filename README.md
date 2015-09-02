@@ -53,7 +53,7 @@ This script will keep the dyno alive once it is awake, but something needs to wa
 heroku addons:create scheduler:standard
 ```
 
-The scheduler must be manually configured from the web interface, so run `heroku addons:open scheduler` and configure it to run `curl ${HUBOT_HEROKU_KEEPALIVE_URL}heroku/keepalive` at the time configured for `HUBOT_HEROKU_WAKEUP_TIME`. 
+The scheduler must be manually configured from the web interface, so run `heroku addons:open scheduler` and configure it to run `curl ${HUBOT_HEROKU_KEEPALIVE_URL}heroku/keepalive` at the time configured for `HUBOT_HEROKU_WAKEUP_TIME`.
 
 ![Heroku Scheduler Screenshot](https://cloud.githubusercontent.com/assets/173/9414275/2e4b67ea-4805-11e5-80d0-d6b26ead50ef.png)
 
