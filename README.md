@@ -58,6 +58,8 @@ The scheduler must be manually configured from the web interface, so run `heroku
 
 ![Heroku Scheduler Screenshot](https://cloud.githubusercontent.com/assets/173/9414275/2e4b67ea-4805-11e5-80d0-d6b26ead50ef.png)
 
+Note that the Scheduler's time is in UTC. If you changed your application's timezone with `TZ`, you'll need to convert that time to UTC for the wakup job. For example, if `HUBOT_HEROKU_WAKEUP_TIME` is set to `06:00` and `TZ` is set to `America/New_York`, you'll need to set the Scheduler to run at 10:00 AM UTC.
+
 ## Legacy Support
 
 Hubot has for a long time had it's own builtin way to keep its web dyno alive,
