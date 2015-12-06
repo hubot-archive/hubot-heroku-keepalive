@@ -23,8 +23,8 @@
 #   Josh Nichols <technicalpickles@github.com>
 
 module.exports = (robot) ->
-  wakeUpTime = (process.env.HUBOT_HEROKU_WAKEUP_TIME or '6:00').split(':').map (i) -> parseInt i
-  sleepTime =  (process.env.HUBOT_HEROKU_SLEEP_TIME or '22:00').split(':').map (i) -> parseInt i
+  wakeUpTime = (process.env.HUBOT_HEROKU_WAKEUP_TIME or '6:00').split(':').map (i) -> parseInt i, 10
+  sleepTime =  (process.env.HUBOT_HEROKU_SLEEP_TIME or '22:00').split(':').map (i) -> parseInt i, 10
 
   wakeUpOffset = (60 * wakeUpTime[0] + wakeUpTime[1]) % (60 * 24)
   awakeMinutes = (60 * (sleepTime[0] + 24) + sleepTime[1] - wakeUpOffset) % (60 * 24)
