@@ -55,7 +55,10 @@ module.exports = (robot) ->
       elapsedMinutes = (60 * (now.getHours() + 24) + now.getMinutes() - wakeUpOffset) % (60 * 24)
 
       if elapsedMinutes < awakeMinutes
-        robot.http("#{keepaliveUrl}heroku/keepalive").post() (err, res, body) =>
+        client = robot.http("#{keepaliveUrl}heroku/keepalive")
+        if process.env.EXPRESS_USER && process.env.EXPRESS_PASSWORD
+          client.auth(process.env.EXPRESS_USER, process.env.EXPRESS_PASSWORD)
+        client.post() (err, res, body) =>
           if err?
             robot.logger.info "keepalive pong: #{err}"
             robot.emit 'error', err
