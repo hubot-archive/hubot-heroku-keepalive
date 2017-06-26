@@ -14,7 +14,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "hubot": "2.x"
+    "hubot": ">=2 <10"
   },
   "devDependencies": {
     "hubot": "2.x",
